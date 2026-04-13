@@ -1,25 +1,60 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import { IonButton, IonIcon, IonContent, IonHeader, IonItem, IonMenu, IonMenuToggle, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
+import { Redirect, Route } from "react-router";
+import { homeOutline, logOutOutline } from "ionicons/icons";
+import Home from "./Home";
 
-const Home: React.FC = () => {
-  return (
+const Menu: React.FC = () => {
+
+    const path = [
+        {name : 'Home' , url:'/app/home', icon:homeOutline}
+    ]
+    
+      
+    
+   return(
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
-  );
-};
+       <IonSplitPane contentId="main">
+        <IonMenu contentId="main">
 
-export default Home;
+            <IonHeader>               
+                <IonToolbar>
+                    <IonTitle>
+                        Menu
+                    </IonTitle>
+                </IonToolbar>
+            </IonHeader>
+
+            <IonContent>
+
+                {path.map((item,index) => (
+                    <IonMenuToggle key={index}>
+                        <IonItem routerLink={item.url} routerDirection="forward">
+                            <IonIcon icon={item.icon} slot="start">
+                                {item.name}
+                            </IonIcon>
+                        </IonItem>
+                    </IonMenuToggle>
+                ))}
+                <IonButton routerLink="/" routerDirection="back" expand= "full">
+                <IonIcon icon={logOutOutline} slot= "start" ></IonIcon>
+                Logout
+                </IonButton>
+
+            </IonContent>
+        </IonMenu>
+
+        <IonRouterOutlet id="main">
+            <Route exact path="/app/Home" component ={Home}/>
+            <Route exact path="/app">
+                 <Redirect to="/app/Home" />
+            </Route>
+
+        </IonRouterOutlet>
+
+       </IonSplitPane>
+    </IonPage>
+
+   );
+
+};
+export default Menu;

@@ -1,25 +1,28 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import { IonButton, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButtons, useIonRouter } from "@ionic/react";
 
-const Home: React.FC = () => {
-  return (
+const Login: React.FC = () => {
+ const navigation = useIonRouter();
+
+      const doLogin = () => {
+    navigation.push('/app', 'forward', 'replace')
+ }
+   return(
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
+        <IonHeader>
+            <IonToolbar>
+                <IonTitle>Login </IonTitle>
+            </IonToolbar>
         </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
-  );
-};
+        <IonContent fullscreen >
+            <IonButton expand= "full" onClick={() => doLogin ()}>
+                Login
+            </IonButton>
 
-export default Home;
+        </IonContent>
+    </IonPage>
+
+   );
+
+}   
+
+export default Login;

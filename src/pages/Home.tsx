@@ -8,7 +8,7 @@ const Home: React.FC = () => {
       <IonTabs>
       <IonTabBar slot="bottom">
         <IonToolbar>
-          <IonTittle>Tabs</IonTittle>
+          <IonTitle>Tabs</IonTitle>
         </IonToolbar>
         {/**/}
         {tab.map((item,index) =>(
